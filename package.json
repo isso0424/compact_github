@@ -22,6 +22,7 @@
     "build": "craco build",
     "test": "craco test",
     "lint": "eslint -c .eslintrc.js --ignore-path .gitignore 'src/**/*.{ts,tsx}'",
+    "fix": "eslint --fix -c .eslintrc.js --ignore-path .gitignore 'src/**/*.{ts,tsx}' && yarn prettier --write 'src/**/*.{ts,tsx}'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

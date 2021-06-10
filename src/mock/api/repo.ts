@@ -1,6 +1,6 @@
-import {Organization} from "../../types/domain/org";
-import {Repository} from "../../types/domain/repo";
-import {User} from "../../types/domain/user";
+import { Organization } from "../../types/domain/org";
+import { Repository } from "../../types/domain/repo";
+import { User } from "../../types/domain/user";
 
 export class MockRepositoryAPI {
   fetchUserRepo(user: User): Array<Repository> {
