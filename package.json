@@ -23,7 +23,9 @@
     "test": "craco test",
     "lint": "eslint -c .eslintrc.js --ignore-path .gitignore 'src/**/*.{ts,tsx}'",
     "fix": "eslint --fix -c .eslintrc.js --ignore-path .gitignore 'src/**/*.{ts,tsx}' && yarn prettier --write 'src/**/*.{ts,tsx}'",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
   },
   "eslintConfig": {
     "extends": [
@@ -49,8 +51,19 @@
     "autoprefixer": "^9",
     "eslint": "^7.28.0",
     "eslint-config-prettier": "^8.3.0",
+    "husky": "^6.0.0",
+    "lint-staged": ">=10",
     "postcss": "^7",
     "prettier": "^2.3.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+  },
+  "lint-staged": {
+    "*.ts": "eslint --cache --fix",
+    "*.{ts,tsx,css,md}": "prettier --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
