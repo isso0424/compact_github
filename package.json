@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-router-dom": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@typescript-eslint/parser": "^4.26.1",
     "autoprefixer": "^9",
@@ -55,6 +56,8 @@
     "lint-staged": ">=10",
     "postcss": "^7",
     "prettier": "^2.3.1",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   },
   "lint-staged": {
