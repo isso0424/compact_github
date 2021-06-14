@@ -9,7 +9,7 @@ interface Props {
   body: string;
 }
 
-export const Detail: FC<Props> = ({ name, iconURL, num, body }) => {
+export const Content: FC<Props> = ({ name, iconURL, num, body }) => {
   const [isOpenBody, setIsOpenBody] = useState(false);
   return (
     <div>
