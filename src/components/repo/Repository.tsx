@@ -63,10 +63,20 @@ export const RepoComponent: FC<Props> = ({ repository }) => {
                 }
               )}
             </div>
-            <p onClick={() => setOpenDetail(() => false)}>close</p>
+            <p
+              className="cursor-pointer"
+              onClick={() => setOpenDetail(() => false)}
+            >
+              close
+            </p>
           </div>
         ) : (
-          <div onClick={() => setOpenDetail(() => true)}>more...</div>
+          <div
+            className="cursor-pointer"
+            onClick={() => setOpenDetail(() => true)}
+          >
+            more...
+          </div>
         )}
       </div>
     </div>
