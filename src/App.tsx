@@ -5,7 +5,10 @@ import { TestPage } from "./pages/Test";
 
 const App: FC = () => {
   return (
-    <div className="absolute top-0 left-0 w-screen h-screen text-white bg-gray-800">
+    <div
+      className="absolute top-0 left-0 w-screen min-h-screen text-white bg-gray-800"
+      style={{ height: "max-content" }}
+    >
       <BrowserRouter>
         <Route exact path="/" component={HomePage} />
         <Route exact path="/test" component={TestPage} />
