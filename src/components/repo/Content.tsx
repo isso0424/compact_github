@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 
-const MAX_CHAR_COUNT = 10;
+const MAX_CHAR_COUNT = 20;
 
 interface Props {
   name: string;
@@ -13,17 +13,20 @@ export const Content: FC<Props> = ({ name, iconURL, num, body }) => {
   const [isOpenBody, setIsOpenBody] = useState(false);
   return (
     <div>
-      <img src={iconURL} />
-      <h4>{num}</h4>
-      <h3>{name}</h3>
-      {isOpenBody ? (
-        <div onClick={() => setIsOpenBody(() => false)}>{body}</div>
-      ) : (
-        <div onClick={() => setIsOpenBody(() => true)}>
-          {body.substr(0, MAX_CHAR_COUNT)}
-          {body.length > 10 && "..."}
-        </div>
-      )}
+      <div className="flex align-middle">
+        <img className="w-8 h-8" src={iconURL} />
+        <h3 className="px-4 text-lg">{num}</h3>
+        <h3 className="text-xl">{name}</h3>
+      </div>
+      <div className="p-2 m-2 bg-black rounded-lg">
+        {isOpenBody || body.length < MAX_CHAR_COUNT ? (
+          <div onClick={() => setIsOpenBody(() => false)}>{body}</div>
+        ) : (
+          <div onClick={() => setIsOpenBody(() => true)}>
+            {body.substr(0, MAX_CHAR_COUNT)}...
+          </div>
+        )}
+      </div>
     </div>
   );
 };
