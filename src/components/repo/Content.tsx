@@ -1,20 +1,21 @@
+import { Icon } from "@primer/octicons-react";
 import React, { FC, useState } from "react";
 
 const MAX_CHAR_COUNT = 20;
 
 interface Props {
   name: string;
-  iconURL: string;
+  icon: Icon;
   num: number;
   body: string;
 }
 
-export const Content: FC<Props> = ({ name, iconURL, num, body }) => {
+export const Content: FC<Props> = ({ name, icon, num, body }) => {
   const [isOpenBody, setIsOpenBody] = useState(false);
   return (
     <div>
       <div className="flex align-middle">
-        <img className="w-8 h-8" src={iconURL} />
+        {icon({ size: 25 })}
         <h3 className="px-4 text-lg">{num}</h3>
         <h3 className="text-xl">{name}</h3>
       </div>
