@@ -1,16 +1,22 @@
+import {
+  GitPullRequestClosedIcon,
+  GitPullRequestIcon,
+  IssueClosedIcon,
+  IssueOpenedIcon,
+} from "@primer/octicons-react";
 import React, { FC, useState } from "react";
 import { Repository } from "../../types/domain/repo";
 import { Content } from "./Content";
 
 const issueIcon = {
-  open: "",
-  close: "",
+  open: IssueOpenedIcon,
+  close: IssueClosedIcon,
 };
 
 const prIcon = {
-  open: "",
-  close: "",
-  merge: "",
+  open: GitPullRequestIcon,
+  close: GitPullRequestClosedIcon,
+  merge: GitPullRequestClosedIcon,
 };
 
 interface Props {
@@ -37,7 +43,7 @@ export const RepoComponent: FC<Props> = ({ repository }) => {
                   name={name}
                   body={body}
                   num={num}
-                  iconURL={isOpen ? issueIcon.open : issueIcon.close}
+                  icon={isOpen ? issueIcon.open : issueIcon.close}
                 />
               ))}
             </div>
@@ -51,7 +57,7 @@ export const RepoComponent: FC<Props> = ({ repository }) => {
                       name={name}
                       body={body}
                       num={num}
-                      iconURL={
+                      icon={
                         isOpen
                           ? prIcon.open
                           : isMerged
