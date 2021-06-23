@@ -19,16 +19,24 @@ const prIcon = {
   merge: GitPullRequestClosedIcon,
 };
 
+const urlBase = "https://github.com";
+
+const contentKinds = {
+  pr: "pull",
+  issue: "issues",
+};
+
 interface Props {
   repository: Repository;
 }
 
 export const RepoComponent: FC<Props> = ({ repository }) => {
   const [isOpenDetail, setOpenDetail] = useState(false);
+  const repoURL = `${urlBase}/${repository.owner}/${repository.name}`;
   return (
     <div className="m-2 bg-gray-500 border-2 border-gray-700 rounded-md">
       <h3 className="p-2 text-xl border-b-2 border-gray-700">
-        <a href={`https://github.com/${repository.owner}/${repository.name}`}>
+        <a href={repoURL}>
           {repository.owner}/{repository.name}
         </a>
       </h3>
@@ -44,6 +52,8 @@ export const RepoComponent: FC<Props> = ({ repository }) => {
                   body={body}
                   num={num}
                   icon={isOpen ? issueIcon.open : issueIcon.close}
+                  repoURL={repoURL}
+                  kind={contentKinds.issue}
                 />
               ))}
             </div>
@@ -64,6 +74,8 @@ export const RepoComponent: FC<Props> = ({ repository }) => {
                           ? prIcon.merge
                           : prIcon.close
                       }
+                      repoURL={repoURL}
+                      kind={contentKinds.pr}
                     />
                   );
                 }
