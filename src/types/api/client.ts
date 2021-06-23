@@ -1,8 +1,12 @@
-type JsonObj = Record<string, unknown>;
+export type JsonObj = Record<string, unknown>;
+export type Response = {
+  data: JsonObj;
+  status: number;
+};
 
 export interface APIClient {
-  get(path: string, body: JsonObj, header: JsonObj): JsonObj;
-  post(path: string, body: JsonObj, header: JsonObj): JsonObj;
-  put(path: string, body: JsonObj, header: JsonObj): JsonObj;
-  del(path: string, body: JsonObj, header: JsonObj): JsonObj;
+  get(path: string, body: JsonObj, header: JsonObj): Promise<Response>;
+  post(path: string, body: JsonObj, header: JsonObj): Promise<Response>;
+  put(path: string, body: JsonObj, header: JsonObj): Promise<Response>;
+  del(path: string, body: JsonObj, header: JsonObj): Promise<Response>;
 }
