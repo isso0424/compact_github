@@ -2,7 +2,7 @@ import { APIClient, JsonObj } from "../../types/api/client";
 import { IssueAPI } from "../../types/api/usecase/issue";
 import { Issue } from "../../types/domain/issue";
 
-export class GitHubIssueAPI implements IssueAPI {
+export class GitHubIssueClient implements IssueAPI {
   private client: APIClient;
   private token: string;
 
