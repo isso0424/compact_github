@@ -12,7 +12,7 @@ export class GitHubPullRequestsClient implements PullRequestAPI {
   }
 
   private repositoryAPIPath(owner: string, name: string): string {
-    return `/repos/${owner}/${name}?state=all`;
+    return `/repos/${owner}/${name}/pulls?state=all`;
   }
 
   private createAuthorizeHeader(): JsonObj {
@@ -28,7 +28,7 @@ export class GitHubPullRequestsClient implements PullRequestAPI {
     const response = await this.client.get(path, {}, header);
     return (response.data as unknown as Array<JsonObj>).map((data) => ({
       name: data.title as string,
-      num: data.id as number,
+      num: data.number as number,
       body: data.body as string,
       isOpen: data.state === "open",
       isMerged: data.merged as boolean,
