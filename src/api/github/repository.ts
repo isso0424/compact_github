@@ -36,16 +36,11 @@ export class GitHubRepositoryClient implements RepositoryAPI {
     return { Authorization: `token ${this.token}` };
   }
 
-  async fetchUserRepo(user: User): Promise<Array<Repository>> {
-    const path = this.userRepositoryPath(user.username);
-    const header = this.createAuthorizeHeader();
-    const response = await this.client.get(path, {}, header);
-    // TODO: define error type
-    if (response.status !== 200) {
-      throw `Error occured. response: ${response.data}`;
-    }
-    const parsed = (response.data as unknown as Array<JsonObj>).map((data) => {
-      const owner = user.username;
+  private async parseResponse(
+    owner: string,
+    response: Array<JsonObj>
+  ): Promise<Array<Repository>> {
+    const parsed = response.map((data) => {
       const name = data.name as string;
       return {
         repo: {
@@ -64,6 +59,7 @@ export class GitHubRepositoryClient implements RepositoryAPI {
     const issuePromise = parsed.map((data) => data.promises.issues);
     const prs = await Promise.all(prPromise);
     const issues = await Promise.all(issuePromise);
+
     return prs.map((pr, index) => ({
       ...parsed[index].repo,
       pullRequests: pr,
@@ -71,7 +67,33 @@ export class GitHubRepositoryClient implements RepositoryAPI {
     }));
   }
 
+  async fetchUserRepo(user: User): Promise<Array<Repository>> {
+    const path = this.userRepositoryPath(user.username);
+    const header = this.createAuthorizeHeader();
+    const response = await this.client.get(path, {}, header);
+    // TODO: define error type
+    if (response.status !== 200) {
+      throw `Error occured. response: ${response.data}`;
+    }
+
+    return await this.parseResponse(
+      user.username,
+      response.data as unknown as Array<JsonObj>
+    );
+  }
+
   async fetchOrgRepo(org: Organization): Promise<Array<Repository>> {
-    throw "Not implemented";
+    const path = this.orgRepositoryPath(org.name);
+    const header = this.createAuthorizeHeader();
+    const response = await this.client.get(path, {}, header);
+    // TODO: define error type
+    if (response.status !== 200) {
+      throw `Error occured. response: ${response.data}`;
+    }
+
+    return await this.parseResponse(
+      org.name,
+      response.data as unknown as Array<JsonObj>
+    );
   }
 }
