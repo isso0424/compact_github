@@ -3,8 +3,8 @@ import { Repository } from "../../types/domain/repo";
 import { User } from "../../types/domain/user";
 
 export class MockRepositoryAPI {
-  fetchUserRepo(user: User): Array<Repository> {
-    return [
+  fetchUserRepo(user: User): Promise<Array<Repository>> {
+    return new Promise(() => [
       {
         owner: user.username,
         name: "example1",
@@ -59,11 +59,11 @@ export class MockRepositoryAPI {
           },
         ],
       },
-    ];
+    ]);
   }
 
-  fetchOrgRepo(org: Organization): Array<Repository> {
-    return [
+  fetchOrgRepo(org: Organization): Promise<Array<Repository>> {
+    return new Promise(() => [
       {
         owner: org.name,
         name: "example1",
@@ -118,6 +118,6 @@ export class MockRepositoryAPI {
           },
         ],
       },
-    ];
+    ]);
   }
 }
