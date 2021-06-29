@@ -2,8 +2,8 @@ import { UserAPI } from "../../types/api/usecase/user";
 import { User } from "../../types/domain/user";
 
 export class MockUserAPI implements UserAPI {
-  fetchUserInfo(username: string): User {
-    return {
+  fetchUserInfo(username: string): Promise<User> {
+    return new Promise(() => ({
       username,
       iconUrl: "https://example.com",
       repos: [
@@ -62,6 +62,6 @@ export class MockUserAPI implements UserAPI {
           ],
         },
       ],
-    };
+    }));
   }
 }
