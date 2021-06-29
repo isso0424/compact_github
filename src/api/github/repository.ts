@@ -3,6 +3,7 @@ import { RepositoryAPI } from "../../types/api/usecase/repo";
 import { Organization } from "../../types/domain/org";
 import { Repository } from "../../types/domain/repo";
 import { User } from "../../types/domain/user";
+import { APIError } from "../../types/error/api";
 import { GitHubIssueClient } from "./issue";
 import { GitHubPullRequestsClient } from "./pr";
 
@@ -71,9 +72,8 @@ export class GitHubRepositoryClient implements RepositoryAPI {
     const path = this.userRepositoryPath(user.username);
     const header = this.createAuthorizeHeader();
     const response = await this.client.get(path, {}, header);
-    // TODO: define error type
-    if (response.status !== 200) {
-      throw `Error occured. response: ${response.data}`;
+    if (response.status >= 200 && response.status < 300) {
+      throw new APIError(response.status, response.data.message as string);
     }
 
     return await this.parseResponse(
@@ -86,9 +86,8 @@ export class GitHubRepositoryClient implements RepositoryAPI {
     const path = this.orgRepositoryPath(org.name);
     const header = this.createAuthorizeHeader();
     const response = await this.client.get(path, {}, header);
-    // TODO: define error type
-    if (response.status !== 200) {
-      throw `Error occured. response: ${response.data}`;
+    if (response.status >= 200 && response.status < 300) {
+      throw new APIError(response.status, response.data.message as string);
     }
 
     return await this.parseResponse(

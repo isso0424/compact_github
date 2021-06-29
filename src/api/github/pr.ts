@@ -1,6 +1,7 @@
 import { APIClient, JsonObj } from "../../types/api/client";
 import { PullRequestAPI } from "../../types/api/usecase/prs";
 import { PullRequest } from "../../types/domain/pr";
+import { APIError } from "../../types/error/api";
 
 export class GitHubPullRequestsClient implements PullRequestAPI {
   private client: APIClient;
@@ -26,6 +27,9 @@ export class GitHubPullRequestsClient implements PullRequestAPI {
     const path = this.repositoryAPIPath(owner, name);
     const header = this.createAuthorizeHeader();
     const response = await this.client.get(path, {}, header);
+    if (response.status >= 200 && response.status < 300) {
+      throw new APIError(response.status, response.data.message as string);
+    }
     return (response.data as unknown as Array<JsonObj>).map((data) => ({
       name: data.title as string,
       num: data.number as number,
