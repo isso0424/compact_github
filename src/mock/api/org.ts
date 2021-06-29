@@ -1,8 +1,9 @@
+import { OrganizationAPI } from "../../types/api/usecase/org";
 import { Organization } from "../../types/domain/org";
 
-export class MockOrgAPI {
-  fetchOrgInfo(name: string): Organization {
-    return {
+export class MockOrgAPI implements OrganizationAPI {
+  fetchOrgInfo(name: string): Promise<Organization> {
+    return new Promise(() => ({
       name,
       iconUrl: "https://example.com",
       repos: [
@@ -61,6 +62,6 @@ export class MockOrgAPI {
           ],
         },
       ],
-    };
+    }));
   }
 }
