@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FC, FormEvent, useState } from "react";
-import { SecretForm } from "../components/form/secret";
+import { TokenForm } from "../components/form/token";
 import { RepoComponent } from "../components/repo/Repository";
 import { MockRepositoryAPI } from "../mock/api/repo";
 import { MockUserAPI } from "../mock/api/user";
@@ -28,12 +28,10 @@ export const TestPage: FC = () => {
 
   return (
     <div>
-      <SecretForm
+      <TokenForm
         onChange={changeHandler}
         onSubmit={submitHandler}
         value={token}
-        placeholder="secret"
-        submitText="Submit"
       />
       {userRepo.map((repo, index) => {
         return <RepoComponent key={index} repository={repo} />;
