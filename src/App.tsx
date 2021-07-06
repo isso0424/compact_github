@@ -4,6 +4,7 @@ import { HomePage } from "./pages/Home";
 import { TestPage } from "./pages/Test";
 
 const App: FC = () => {
+  console.log("hoge");
   return (
     <div
       className="absolute top-0 left-0 w-screen min-h-screen text-white bg-gray-800"
