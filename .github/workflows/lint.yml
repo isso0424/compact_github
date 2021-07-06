@@ -12,7 +12,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
@@ -21,6 +20,9 @@ jobs:
           with:
             path: ~/.pnpm-store
             key: ${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+      - uses: pnpm/actions-setup@v1.2.1
+        with:
+          version: 5.14.1
       - name: install packages
         run: |
           pnpm install
