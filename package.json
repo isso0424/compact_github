@@ -65,7 +65,7 @@
   },
   "lint-staged": {
     "*.ts": "eslint --cache --fix",
-    "*.{ts,tsx}": "craco test",
+    "*.{ts,tsx}": "craco test -- --watchAll",
     "*.{ts,tsx,css,md}": "prettier --write"
   },
   "husky": {
