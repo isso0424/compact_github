@@ -7,4 +7,9 @@ module.exports = {
       ],
     },
   },
+  jest: {
+    configure: {
+      rootDir: 'tests/',
+    },
+  },
 };
