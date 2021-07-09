@@ -11,5 +11,12 @@ module.exports = {
     configure: {
       rootDir: 'tests/',
     },
+    moduleFileExtensions: [
+      "ts",
+      "js",
+    ],
+    moduleNameMapper: {
+      "~": "src/",
+    },
   },
 };
