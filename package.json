@@ -65,7 +65,7 @@
   },
   "lint-staged": {
     "*.ts": "eslint --cache --fix",
-    "*.{ts,tsx}": "pnpm test -- --watchAll=false",
+    "*.{ts,tsx}": "pnpm test -- --watchAll=false --passWithNoTests",
     "*.{ts,tsx,css,md}": "prettier --write"
   },
   "husky": {

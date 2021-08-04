@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, FormEvent, useState } from "react";
+import React, { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
 import { TokenForm } from "../components/form/token";
 import { RepoComponent } from "../components/repo/Repository";
 import { MockRepositoryAPI } from "../mock/api/repo";
@@ -10,12 +10,14 @@ export const TestPage: FC = () => {
   const mockUserClient = new MockUserAPI();
   const [token, setToken] = useState<string>("");
   const [userRepo, setUserRepo] = useState<Array<Repository>>([]);
-  mockUserClient
-    .fetchUserInfo("example1")
-    .then((data) => {
-      return mockClient.fetchUserRepo(data);
-    })
-    .then((data) => setUserRepo(() => data));
+  useEffect(() => {
+    mockUserClient
+      .fetchUserInfo("example1")
+      .then((data) => {
+        return mockClient.fetchUserRepo(data);
+      })
+      .then((data) => setUserRepo(() => data));
+  }, []);
 
   const changeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setToken(() => event.target.value);
