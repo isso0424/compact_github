@@ -1,6 +1,6 @@
-import React, { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
 import { TokenForm } from "../components/form/token";
-import { RepoComponent } from "../components/repo/Repository";
+import { RepoList } from "../components/repo/List";
 import { MockRepositoryAPI } from "../mock/api/repo";
 import { MockUserAPI } from "../mock/api/user";
 import { Repository } from "../types/domain/repo";
@@ -35,9 +35,7 @@ export const TestPage: FC = () => {
         onSubmit={submitHandler}
         value={token}
       />
-      {userRepo.map((repo, index) => {
-        return <RepoComponent key={index} repository={repo} />;
-      })}
+      <RepoList repositories={userRepo} />
     </div>
   );
 };
