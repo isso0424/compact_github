@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, FC, FormEvent, useState } from "react";
 import { Repository } from "../../../types/domain/repo";
 import { SearcherForm } from "./Form";
 import { Results } from "./Results";
@@ -12,10 +12,12 @@ export const Searcher: FC<Props> = ({ repositories }) => {
   const [inputting, setInputting] = useState("");
 
   const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault();
     setInputting(event.target.value);
   };
 
-  const onQueryChange = () => {
+  const onQueryChange = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setQuery(inputting);
   };
 

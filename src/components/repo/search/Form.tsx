@@ -1,9 +1,9 @@
-import { FC, ChangeEvent } from "react";
+import { FC, ChangeEvent, FormEvent } from "react";
 import { TextForm } from "../../form/textForm";
 
 interface Props {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: () => void;
+  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
   value: string;
 }
 
